@@ -1,14 +1,25 @@
-# tury-stack-frontend-primitives-pattern — index
+# @turystack/frontend-primitives-pattern
 
-The grammar of how to write UI primitive components (shared library or the app's `src/ui/`). Start with `SKILL.md` (how to use it) and `00-overview.md` (mental model + invariants).
+UI primitive constitution skill — the unit grammar for how each primitive component is written in a turystack frontend. Installed into .claude/skills and/or .codex/skills via the turystack CLI.
 
-| Section | Ids | Covers |
-|---|---|---|
-| `00-overview.md` | — | Context (library vs app-local), mental model, most broken invariants |
-| `01-component-structure.md` | `CMP-n` | Folder per component, 5 files, barrel, named exports |
-| `02-props.md` | `PROP-n` | Semantic API, named unions, sections, controlled/uncontrolled, modes, generics |
-| `03-styles.md` | `STY-n` | Internal tv(), zero className, defaultVariants, tokens + theme via Provider |
-| `04-composition.md` | `CPS-n` | Headless primitives, compound components, asChild, single Provider |
-| `05-stories.md` | `STB-n` | One story per meaningful state, args only — library only (app-local has no Storybook) |
-| `06-tests.md` | `TST-n` | Observable contract, user-event, value in onChange |
-| `07-consumption.md` | `USO-n` | Discovery, wrapper with Omit, extending the library, app-local primitive |
+## Installation
+
+```bash
+pnpm add -D @turystack/frontend-primitives-pattern
+```
+
+## Contents
+
+- [UI Primitive Standards](00-overview.md)
+- [Component Structure](01-component-structure.md)
+- [Props — the primitive's API](02-props.md)
+- [Styles — internal variants, zero className](03-styles.md)
+- [Composition — headless, compound, provider](04-composition.md)
+- [Stories — the contract's living doc](05-stories.md)
+- [Tests — the tested contract](06-tests.md)
+- [Consumption — using and extending primitives](07-consumption.md)
+- [Skill manifest](SKILL.md)
+
+## Documentation
+
+**https://tury.dev/libs/frontend-primitives-pattern**
