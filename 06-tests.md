@@ -1,5 +1,9 @@
 # Tests — the tested contract
 
+**Rules defined here:** `TST-1` · `TST-2` · `TST-3` · `TST-4` · `TST-5` ·
+`TST-6` · `TST-L1` — the law is the *Invariants* table below; every ❌ item
+cites the id it violates.
+
 ## 🌐 Generic pattern
 
 ### Concept
@@ -14,15 +18,15 @@ A primitive's test covers the **observable contract**: what each prop promises h
 
 ### Invariants
 
-| id | Invariant |
-|---|---|
-| TST-1 | A test asserts behavior observable through the prop contract — never an implementation detail (class string, internal tag, DOM order). Visual variation, when it needs an assert, is checked by a semantic attribute (role, `aria-*`, `data-*`). |
-| TST-2 | Every state boolean has a test of the compound effect: `loading` shows an indicator **and** blocks interaction; `disabled` blocks `onClick`. |
-| TST-3 | `onChange` is asserted by the **value** delivered (the domain), not by the call itself. |
-| TST-4 | A component with `mode`/a discriminated union tests each mode — including the type of the value delivered in each one. |
-| TST-5 | The component's pure util (`.utils.ts`) has its own test, isolated from the render. |
-| TST-6 | Interaction in the test uses real user events (click, typing, keyboard) — never a synthetic handler/event dispatch. |
-| TST-L1 | Vitest + Testing Library + `user-event`; the `<name>.test.tsx` file placed in the component folder. |
+| ID | Law (one line) | Gate |
+|---|---|---|
+| TST-1 | A test asserts behavior observable through the prop contract — never an implementation detail (class string, internal tag, DOM order). Visual variation, when it needs an assert, is checked by a semantic attribute (role, `aria-*`, `data-*`). | `grit:no-implementation-query` |
+| TST-2 | Every state boolean has a test of the compound effect: `loading` shows an indicator **and** blocks interaction; `disabled` blocks `onClick`. | `test:compound-state` |
+| TST-3 | `onChange` is asserted by the **value** delivered (the domain), not by the call itself. | `manual` |
+| TST-4 | A component with `mode`/a discriminated union tests each mode — including the type of the value delivered in each one. | `manual` |
+| TST-5 | The component's pure util (`.utils.ts`) has its own test, isolated from the render. | `gate:util-tested` |
+| TST-6 | Interaction in the test uses real user events (click, typing, keyboard) — never a synthetic handler/event dispatch. | `grit:no-synthetic-event` |
+| TST-L1 | Vitest + Testing Library + `user-event`; the `<name>.test.tsx` file placed in the component folder. | `gate:test-file-placement` |
 
 ## 🛠️ Project-specific
 

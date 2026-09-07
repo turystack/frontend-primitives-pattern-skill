@@ -1,5 +1,9 @@
 # Props — the primitive's API
 
+**Rules defined here:** `PROP-1` · `PROP-2` · `PROP-3` · `PROP-4` · `PROP-5` ·
+`PROP-6` · `PROP-7` · `PROP-8` · `PROP-9` · `PROP-10` · `PROP-11` — the law is
+the *Invariants* table below; every ❌ item cites the id it violates.
+
 ## 🌐 Generic pattern
 
 ### Concept
@@ -19,18 +23,19 @@ A primitive's contract is composed of these blocks, always in this logic:
 
 ### Invariants
 
-| id | Invariant |
-|---|---|
-| PROP-1 | A prop is semantic and dictates behavior; **no** prop passes CSS through — there is no `className`, `style`, free-form color, numeric spacing or any arbitrary visual value in the public API. |
-| PROP-2 | Every value domain is a **named and exported** union (`ButtonVariant = 'default' \| 'ghost' \| ...`), never an inline union on the prop. |
-| PROP-3 | Before naming a new prop, check what Mantine/Ant Design/Chakra call the same concept; only invent a name with no established precedent. |
-| PROP-4 | Interactive state via booleans with a defined compound effect: `loading` shows an indicator **and** blocks interaction; `disabled` blocks; `block` takes up the full width. |
-| PROP-5 | Adjacent content comes in through sections (`leftSection`/`rightSection`); the component owns the layout between section and content. |
-| PROP-6 | A component with a value exposes the pair `value` (controlled) + `defaultValue` (uncontrolled) + `onChange` — never just one of the sides. |
-| PROP-7 | `onChange` delivers the **domain value** (string, number, `T[]`, `null`), never the platform's raw event. |
-| PROP-8 | Mutually exclusive modes = discriminated union on the `mode` prop; the type of `value`/`onChange` changes with the mode and the compiler rejects an invalid combination. |
-| PROP-9 | A data component is generic (`<T, I, O>`): `options: T[]` + `optionLabel`/`optionValue` extractors as `keyof T` or a function — the consumer never pre-maps data into a component-specific shape. |
-| PROP-10 | Every optional behavior prop has a default declared in the component (destructuring or `defaultVariants`) — a consumer who passes nothing gets the canonical primitive. |
+| ID | Law (one line) | Gate |
+|---|---|---|
+| PROP-1 | A prop is semantic and dictates behavior; **no** prop passes CSS through — there is no `className`, `style`, free-form color, numeric spacing or any arbitrary visual value in the public API. | `grit:no-classname-prop` |
+| PROP-2 | Every value domain is a **named and exported** union (`ButtonVariant = 'default' \| 'ghost' \| ...`), never an inline union on the prop. | `grit:no-inline-union` |
+| PROP-3 | Before naming a new prop, check what Mantine/Ant Design/Chakra call the same concept; only invent a name with no established precedent. | `manual` |
+| PROP-4 | Interactive state via booleans with a defined compound effect: `loading` shows an indicator **and** blocks interaction; `disabled` blocks; `block` takes up the full width. | `test:compound-state` |
+| PROP-5 | Adjacent content comes in through sections (`leftSection`/`rightSection`); the component owns the layout between section and content. | `manual` |
+| PROP-6 | A component with a value exposes the pair `value` (controlled) + `defaultValue` (uncontrolled) + `onChange` — never just one of the sides. | `gate:controlled-pair` |
+| PROP-7 | `onChange` delivers the **domain value** (string, number, `T[]`, `null`), never the platform's raw event. | `grit:onchange-delivers-value` |
+| PROP-8 | Mutually exclusive modes = discriminated union on the `mode` prop; the type of `value`/`onChange` changes with the mode and the compiler rejects an invalid combination. | `manual` |
+| PROP-9 | A data component is generic (`<T, I, O>`): `options: T[]` + `optionLabel`/`optionValue` extractors as `keyof T` or a function — the consumer never pre-maps data into a component-specific shape. | `manual` |
+| PROP-10 | Every optional behavior prop has a default declared in the component (destructuring or `defaultVariants`) — a consumer who passes nothing gets the canonical primitive. | `manual` |
+| PROP-11 | An icon enters as a **node slot** (`leftSection`, `icon`), never as a name string the component resolves. Icons come from `@turystack/react-icons`; the primitive sizes and hides them (`AXS-L1`) and never ships an icon registry of its own. | `grit:no-icon-name-prop` |
 
 ## 🛠️ Project-specific
 

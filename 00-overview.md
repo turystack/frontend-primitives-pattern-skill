@@ -13,6 +13,9 @@
 >
 > **⚠️ Comments in the examples are didactic** — they explain the rule being demonstrated there. **Never copy a comment into the code**: the standard is zero comments.
 
+**Rules defined here:** none — every rule this file states is defined
+elsewhere and cited by id.
+
 ## Context (check BEFORE writing any component)
 
 A primitive lives in one of two places — **the grammar is identical in both**:
@@ -43,6 +46,19 @@ flowchart LR
 - Need a different **behavior** → a semantic prop; research what Mantine/Ant Design/Chakra call the same concept before inventing a name.
 - The **app** wants to customize → theme (design tokens selected in the root Provider), decided once — never per instance.
 - Several elements with **shared state** → compound component with internal context.
+
+## Governed by the constitution
+
+These laws live in `turystack-architecture-pattern` and are not restated in
+this skill. They are what a primitive inherits from the architecture:
+
+| ID | Law | How a primitive expresses it |
+|---|---|---|
+| `ARC-CTR-1` | A contract is declared once; downstream types derive from it. | `.types.ts` is the contract; a consumer derives with `Omit`/`Pick`, never a parallel type |
+| `ARC-LAY-5` | The barrel exposes the public surface. | `index.ts` exports component + types; nobody imports the internal file |
+| `ARC-LAY-6` | Organization by unit, no folder of technical type. | one folder per component; no global `styles/` or `helpers/` |
+| `ARC-ERR-9` | Unavailability is stated, never hidden. | a blocked control renders disabled with a reachable reason; it is never removed |
+| `ARC-SEC-10` | Untrusted data is neutralized at the output point. | rich HTML only through a sanitizer, never a raw injection prop |
 
 ## Invariants (the most broken ones)
 

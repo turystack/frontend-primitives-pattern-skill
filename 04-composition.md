@@ -1,5 +1,9 @@
 # Composition — headless, compound, provider
 
+**Rules defined here:** `CPS-1` · `CPS-2` · `CPS-3` · `CPS-4` · `CPS-5` ·
+`CPS-L1` · `CPS-L2` · `CPS-L3` — the law is the *Invariants* table below;
+every ❌ item cites the id it violates.
+
 ## 🌐 Generic pattern
 
 ### Concept
@@ -15,16 +19,16 @@ The primitive **styles and types**; what delivers accessibility (focus, keyboard
 
 ### Invariants
 
-| id | Invariant |
-|---|---|
-| CPS-1 | An interactive element is never raw HTML — always an accessible headless primitive; native HTML only where no equivalent primitive exists (e.g.: `input type="file"`). |
-| CPS-2 | Component with parts = compound component with dot notation; state between the parts flows through the component's internal context, never through prop drilling demanded of the consumer. |
-| CPS-3 | Render polymorphism via `asChild` — never an `as`/`component` prop that accepts an arbitrary element and leaks control of the render. |
-| CPS-4 | Theme, color scheme and the design system's other global preferences live in a single Provider at the root; no primitive reads global configuration from anywhere else. |
-| CPS-5 | A primitive is domain-agnostic: zero SDK/domain/route imports; it receives ready data through a generic prop. |
-| CPS-L1 | Compound components via `Object.assign(Root, { Part })` — preserves tree shaking and the parts' typing. |
-| CPS-L2 | Internal context in `<name>.context.ts` in the component folder; the consuming hook throws a clear error when used outside the Root. |
-| CPS-L3 | The headless primitive's composition tree is followed **exactly** — each primitive has its strict structure of parts; never improvise the hierarchy. |
+| ID | Law (one line) | Gate |
+|---|---|---|
+| CPS-1 | An interactive element is never raw HTML — always an accessible headless primitive; native HTML only where no equivalent primitive exists (e.g.: `input type="file"`). | `grit:no-raw-interactive` |
+| CPS-2 | Component with parts = compound component with dot notation; state between the parts flows through the component's internal context, never through prop drilling demanded of the consumer. | `manual` |
+| CPS-3 | Render polymorphism via `asChild` — never an `as`/`component` prop that accepts an arbitrary element and leaks control of the render. | `grit:no-as-prop` |
+| CPS-4 | Theme, color scheme and the design system's other global preferences live in a single Provider at the root; no primitive reads global configuration from anywhere else. | `manual` |
+| CPS-5 | A primitive is domain-agnostic: zero SDK/domain/route imports; it receives ready data through a generic prop. | `biome:noRestrictedImports` |
+| CPS-L1 | Compound components via `Object.assign(Root, { Part })` — preserves tree shaking and the parts' typing. | `manual` |
+| CPS-L2 | Internal context in `<name>.context.ts` in the component folder; the consuming hook throws a clear error when used outside the Root. | `manual` |
+| CPS-L3 | The headless primitive's composition tree is followed **exactly** — each primitive has its strict structure of parts; never improvise the hierarchy. | `manual` |
 
 ## 🛠️ Project-specific
 

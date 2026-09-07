@@ -1,5 +1,9 @@
 # Component Structure
 
+**Rules defined here:** `CMP-1` · `CMP-2` · `CMP-3` · `CMP-4` · `CMP-5` ·
+`CMP-L1` — the law is the *Invariants* table below; every ❌ item cites the id
+it violates.
+
 ## 🌐 Generic pattern
 
 ### Concept
@@ -21,14 +25,14 @@ Auxiliary files go into the same folder whenever they exist: styles shared betwe
 
 ### Invariants
 
-| id | Invariant |
-|---|---|
-| CMP-1 | One component = one folder with implementation, contract (`types`), test and barrel; in the shared library, stories too. None is optional in its context. |
-| CMP-2 | The component barrel re-exports the component **and** every public type; the consumer imports only from the package's root barrel/`src/ui` — never a deep import of an internal file. |
-| CMP-3 | An auxiliary file (shared style, pure util, data, context) lives in the component folder and is prefixed with its name; a pure util carries its own test. |
-| CMP-4 | Folder and files in kebab-case with the component's name; the exported name is the PascalCase equivalent (`date-range-input/` → `DateRangeInput`). |
-| CMP-5 | The contract lives in its own file, separate from the implementation — the implementation **imports** the contract, never defines it inline. |
-| CMP-L1 | Named export always; `export default` never — not in the component, not in the barrel, not in the stories (except the `meta` the stories tool requires). |
+| ID | Law (one line) | Gate |
+|---|---|---|
+| CMP-1 | One component = one folder with implementation, contract (`types`), test and barrel; in the shared library, stories too. None is optional in its context. | `gate:component-files` |
+| CMP-2 | The component barrel re-exports the component **and** every public type; the consumer imports only from the package's root barrel/`src/ui` — never a deep import of an internal file. | `gate:barrel-shape` · `gate:contract-sync` |
+| CMP-3 | An auxiliary file (shared style, pure util, data, context) lives in the component folder and is prefixed with its name; a pure util carries its own test. | `gate:component-files` |
+| CMP-4 | Folder and files in kebab-case with the component's name; the exported name is the PascalCase equivalent (`date-range-input/` → `DateRangeInput`). | `gate:kebab-case` |
+| CMP-5 | The contract lives in its own file, separate from the implementation — the implementation **imports** the contract, never defines it inline. | `gate:component-files` |
+| CMP-L1 | Named export always; `export default` never — not in the component, not in the barrel, not in the stories (except the `meta` the stories tool requires). | `grit:no-default-export` |
 
 ## 🛠️ Project-specific
 

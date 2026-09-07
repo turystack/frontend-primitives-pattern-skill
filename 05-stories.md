@@ -2,6 +2,9 @@
 
 > **Scope:** stories live in the **shared library** — the app does not set up Storybook. The living doc of an app-local primitive is its `.types.ts` + real usage in the routes (see STB-4).
 
+**Rules defined here:** `STB-1` · `STB-2` · `STB-3` · `STB-4` · `STB-L1` — the
+law is the *Invariants* table below; every ❌ item cites the id it violates.
+
 ## 🌐 Generic pattern
 
 ### Concept
@@ -16,13 +19,13 @@ A story is the contract's **executable documentation**: every meaningful state o
 
 ### Invariants
 
-| id | Invariant |
-|---|---|
-| STB-1 | Every variation the contract promises (each `variant` value, each state boolean, each `mode`) has a named story — a contract without a story is an undocumented contract. |
-| STB-2 | A story is a self-contained example via `args`; never manual configuration of controls/knobs (`argTypes`) — the example is the doc, not the playground. |
-| STB-3 | The story group's title mirrors the component's category in the barrel — the doc navigation and the public API tell the same structure. |
-| STB-4 | Stories live in the shared library; an app-local primitive that grows to the point of deserving stories (generic variants, reuse across domains) is a sign of **promotion to the library** — promote first, write the stories there. |
-| STB-L1 | `Meta`/`StoryObj` with `satisfies`; the `<name>.stories.tsx` file placed in the component folder and excluded from the library build. |
+| ID | Law (one line) | Gate |
+|---|---|---|
+| STB-1 | Every variation the contract promises (each `variant` value, each state boolean, each `mode`) has a named story — a contract without a story is an undocumented contract. | `gate:story-coverage` |
+| STB-2 | A story is a self-contained example via `args`; never manual configuration of controls/knobs (`argTypes`) — the example is the doc, not the playground. | `manual` |
+| STB-3 | The story group's title mirrors the component's category in the barrel — the doc navigation and the public API tell the same structure. | `manual` |
+| STB-4 | Stories live in the shared library; an app-local primitive that grows to the point of deserving stories (generic variants, reuse across domains) is a sign of **promotion to the library** — promote first, write the stories there. | `manual` |
+| STB-L1 | `Meta`/`StoryObj` with `satisfies`; the `<name>.stories.tsx` file placed in the component folder and excluded from the library build. | `gate:story-placement` |
 
 ## 🛠️ Project-specific
 

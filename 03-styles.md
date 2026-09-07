@@ -1,5 +1,10 @@
 # Styles — internal variants, zero className
 
+**Rules defined here:** `STY-1` · `STY-2` · `STY-3` · `STY-4` · `STY-5` ·
+`STY-6` · `STY-7` · `STY-8` · `STY-9` · `STY-10` · `STY-L1` · `STY-L2` · `STY-L4` ·
+`STY-L3` — the law is the *Invariants* table below; every ❌ item cites the id
+it violates.
+
 ## 🌐 Generic pattern
 
 ### Concept
@@ -15,19 +20,22 @@ The component is the **absolute owner of its look**. Every style is resolved int
 
 ### Invariants
 
-| id | Invariant |
-|---|---|
-| STY-1 | `className`/`style` never come in or go out through the component's public API — the visual resolve is 100% internal. |
-| STY-2 | Every style is declared in the variant system (base/variants/defaultVariants) — never a loose conditional class in the render (string concatenation, class ternary, inline style). |
-| STY-3 | The contract's `variant`/`size` unions and the variant keys in the style are 1:1 — adding a value to the union without the matching variant (or vice versa) is a reprove. |
-| STY-4 | Every axis of variation with a default declares `defaultVariants` — the component with no props renders the canonical one. |
-| STY-5 | Each styleable sub-element has its own variant object; the root element's is the file's main one. |
-| STY-6 | Intersection of axes (e.g.: `variant` ghost + `size` icon) → `compoundVariants`, never class logic in the render. |
-| STY-7 | Dimension and spacing exposed in the API follow a token scale (`sm`/`md`/`lg`, `none`/`xs`/`sm`/`md`/`lg`/`xl`) — never a numeric/arbitrary value. |
-| STY-8 | Per-app visual identity = **theme**: design tokens (semantic CSS variables) selected in the root Provider; the component references the token (`primary`, `muted`), never a hardcoded brand value — per-instance customization does not exist. |
-| STY-L1 | Styles declared at the **top of the component's file** with `tv` (tailwind-variants); the root element's object is exported under the name `styles`. |
-| STY-L2 | A style shared between components lives in the owner component's `<name>.shared.ts` and is imported by the others — never copied. |
-| STY-L3 | `cn()` (clsx + tailwind-merge, in `support/utils`) only for **internal** conditional merging — never to accept a class coming from outside. |
+| ID | Law (one line) | Gate |
+|---|---|---|
+| STY-1 | `className`/`style` never come in or go out through the component's public API — the visual resolve is 100% internal. | `grit:no-classname-prop` |
+| STY-2 | Every style is declared in the variant system (base/variants/defaultVariants) — never a loose conditional class in the render (string concatenation, class ternary, inline style). | `grit:no-conditional-class` |
+| STY-3 | The contract's `variant`/`size` unions and the variant keys in the style are 1:1 — adding a value to the union without the matching variant (or vice versa) is a reprove. | `gate:variant-union-parity` |
+| STY-4 | Every axis of variation with a default declares `defaultVariants` — the component with no props renders the canonical one. | `gate:defaults-declared` |
+| STY-5 | Each styleable sub-element has its own variant object; the root element's is the file's main one. | `manual` |
+| STY-6 | Intersection of axes (e.g.: `variant` ghost + `size` icon) → `compoundVariants`, never class logic in the render. | `manual` |
+| STY-7 | Dimension and spacing exposed in the API follow a token scale (`sm`/`md`/`lg`, `none`/`xs`/`sm`/`md`/`lg`/`xl`) — never a numeric/arbitrary value. | `manual` |
+| STY-8 | Per-app visual identity = **theme**: design tokens (semantic CSS variables) selected in the root Provider; the component references the token (`primary`, `muted`), never a hardcoded brand value — per-instance customization does not exist. | `grit:no-hardcoded-brand` |
+| STY-9 | Light and dark are resolved by the **tokens**, never by the component: no primitive branches on the color scheme, and no variant exists in a `dark` flavour. A scheme the component can see is a scheme it can get wrong in one place and right in another. | `grit:no-scheme-branch` |
+| STY-10 | The token set is the contract between library and app: the app chooses **values**, the library chooses **which tokens exist**. An app that needs a token the library does not publish has found a gap to close upstream, not a place for a local variable. | `manual` |
+| STY-L1 | Styles declared at the **top of the component's file** with `tv` (tailwind-variants); the root element's object is exported under the name `styles`. | `gate:styles-export` |
+| STY-L2 | A style shared between components lives in the owner component's `<name>.shared.ts` and is imported by the others — never copied. | `manual` |
+| STY-L3 | `cn()` (clsx + tailwind-merge, in `support/utils`) only for **internal** conditional merging — never to accept a class coming from outside. | `grit:no-external-class-merge` |
+| STY-L4 | Every element the component paints carries a stable semantic class beside its utilities, derived from the slot's key (`cellContent` → `<name>-cell-content`; a `base` or `root` → `<name>-root` or the bare `<name>`). It is the surface a theme reaches for: an element without one renders correctly and cannot be restyled. | `gate:slots-named` |
 
 ## 🛠️ Project-specific
 

@@ -18,6 +18,7 @@ pnpm add -D @turystack/frontend-primitives-pattern
 - [Stories — the contract's living doc](05-stories.md)
 - [Tests — the tested contract](06-tests.md)
 - [Consumption — using and extending primitives](07-consumption.md)
+- [Accessibility — the unit's obligations](08-accessibility.md)
 - [Skill manifest](SKILL.md)
 
 ## Documentation

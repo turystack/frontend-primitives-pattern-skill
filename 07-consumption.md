@@ -1,5 +1,9 @@
 # Consumption — using and extending primitives
 
+**Rules defined here:** `USO-1` · `USO-2` · `USO-3` · `USO-4` · `USO-5` ·
+`USO-6` — the law is the *Invariants* table below; every ❌ item cites the id
+it violates.
+
 ## 🌐 Generic pattern
 
 ### Concept
@@ -15,14 +19,14 @@ The consumer of a primitive works **against the real contract**, never against m
 
 ### Invariants
 
-| id | Invariant |
-|---|---|
-| USO-1 | Before using or extending: read the barrel and the real `.types.ts` — never invent a prop/value from memory; a prop that does not exist in the contract is a review reprove. |
-| USO-2 | A domain wrapper derives its contract from the primitive (`Omit` of the managed props) — never retypes a parallel contract by hand. |
-| USO-3 | Missing capability → extend the primitive at the source (library first, `src/ui/` if specific) and consume it afterwards — never rebuild with HTML/CSS in the app what the primitive should offer. |
-| USO-4 | A product-specific primitive lives in the app's `src/ui/` and follows this skill **in full** (the app-local context's structure — no `.stories.tsx`, see STB-4 —, semantic props, internal variants, no `className`). |
-| USO-5 | Never duplicate an existing primitive — neither by copying the folder, nor by recreating it with raw HTML; a UI concept has exactly one owner. |
-| USO-6 | Changed a primitive → update contract, stories, tests and barrel together, and validate the package (typecheck · lint · build) before consuming the change. |
+| ID | Law (one line) | Gate |
+|---|---|---|
+| USO-1 | Before using or extending: read the barrel and the real `.types.ts` — never invent a prop/value from memory; a prop that does not exist in the contract is a review reprove. | `manual` |
+| USO-2 | A domain wrapper derives its contract from the primitive (`Omit` of the managed props) — never retypes a parallel contract by hand. | `gate:no-parallel-contract` |
+| USO-3 | Missing capability → extend the primitive at the source (library first, `src/ui/` if specific) and consume it afterwards — never rebuild with HTML/CSS in the app what the primitive should offer. | `manual` |
+| USO-4 | A product-specific primitive lives in the app's `src/ui/` and follows this skill **in full** (the app-local context's structure — no `.stories.tsx`, see STB-4 —, semantic props, internal variants, no `className`). | `manual` |
+| USO-5 | Never duplicate an existing primitive — neither by copying the folder, nor by recreating it with raw HTML; a UI concept has exactly one owner. | `gate:no-duplicate-primitive` |
+| USO-6 | Changed a primitive → update contract, stories, tests and barrel together, and validate the package (typecheck · lint · build) before consuming the change. | `manual` |
 
 ## 🛠️ Project-specific
 
